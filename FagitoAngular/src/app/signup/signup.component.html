@@ -1,0 +1,43 @@
+<h2>Sign Up</h2>
+<div *ngIf="success; then thenBlock else elseBlock"></div>
+  <ng-template #elseBlock>
+      <form #form="ngForm" (ngSubmit)="SubmitAction(form)">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control" name="name" ngModel />
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="text" class="form-control" #phone="ngModel" ngModel name='phone' pattern="[0-9]{10}" >
+              <span class="help-block" *ngIf="phone.errors?.pattern && phone.touched">
+                Enter a valid Phone Number!!!
+              </span>
+            </div>
+            <div class="form-group">
+              <label >Email address</label>
+              <input type="email" class="form-control" #email="ngModel" ngModel name='email' aria-describedby="emailHelp" pattern="[a-zA-Z0-9\.]+@[a-zA-Z]+[\.]?[a-zA-Z]{0,3}"/>
+              <span class="help-block" *ngIf="email.errors?.pattern && email.touched">
+                Enter a valid email!!!
+              </span>
+            </div>
+            <div class="form-group">
+              <label >Password</label>
+              <input type="password" class="form-control" [(ngModel)]="password" name='password' >
+            </div>
+            <div class="form-group">
+              <label >Confirm Password</label>
+              <input type="password" class="form-control"  [(ngModel)]='confirmPassword' name='confirmPassword' (blur)='PasswordCheck()' >
+            </div>
+            <div id="Error"></div>
+            <button type="submit" class="btn btn-primary" >Submit</button>
+        </form>
+  </ng-template>
+  <ng-template #thenBlock>
+    <div class="success-block">
+        <span>user Succeffully Registered</span><br>
+        <span class="click" routerLink="/login">Click here to <b>LogIn</b></span>
+
+        
+    </div>
+  </ng-template>
+
